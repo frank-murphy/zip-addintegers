@@ -1,0 +1,43 @@
+version: 2.1
+
+executors:
+  test-executor:
+    docker:
+      - image: cimg/python:3.14.2
+
+jobs:
+  lint-addintegers:
+    executor: test-executor
+    steps:
+      - checkout
+
+      - run:
+          name: "Install pylint"
+          command: |
+            pip install pylint
+
+      - run:
+          name: "Linting addintegers"
+          command: |
+            pylint -v addintegers tests/test_simple.py
+          
+  test-addintegers:
+    executor: test-executor
+    steps:
+      - checkout
+
+      - run:
+          name: "Install pytest"
+          command: |
+            pip install pytest
+
+      - run:
+          name: "Testing addintegers"
+          command: |
+            pytest -vs
+
+workflows:
+  test-and-lint-addintegers:
+    jobs:
+      - lint-addintegers
+      - test-addintegers

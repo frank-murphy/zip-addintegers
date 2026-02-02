@@ -1,0 +1,18 @@
+
+"""
+test cases for addintegers command line tool
+"""
+
+import subprocess
+
+def run_add_integers(*args):
+    """Run addintegers with args on command line, return output & exit code """
+    completed_process = subprocess.run(["./addintegers"] + list(args),
+        capture_output = True, text = True, check = False)
+    return completed_process.stdout.strip(), completed_process.returncode
+
+def test_add3():
+    """Add three integers"""
+    output, exitcode = run_add_integers("1", "2", "9")
+    assert output == "12"
+    assert exitcode == 0
