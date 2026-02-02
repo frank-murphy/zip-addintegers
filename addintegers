@@ -7,7 +7,7 @@ A command line tool to add integers
 import sys
 
 if len(sys.argv) < 2:
-    exit(1)
+    sys.exit(1)
 
 total = 0
 for arg in sys.argv[1:]:
