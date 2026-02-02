@@ -29,3 +29,13 @@ def test_neg_null_arg():
     output, exitcode = run_add_integers()
     assert output == ""
     assert exitcode != 0
+
+def test_git_status():
+    """Print git status"""
+    completed_process = subprocess.run(["git", "status"],
+        capture_output = True, text = True, check = False)            
+    output, exitcode = completed_process.stdout.strip(), completed_process.returncode
+    output = output.splitlines()
+    assert output[0] != "On branch main" # This will fail when on git main
+    assert exitcode == 0
+
