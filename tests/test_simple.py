@@ -11,8 +11,15 @@ def run_add_integers(*args):
         capture_output = True, text = True, check = False)
     return completed_process.stdout.strip(), completed_process.returncode
 
+# Test cases
 def test_add3():
     """Add three integers"""
     output, exitcode = run_add_integers("1", "2", "9")
     assert output == "12"
     assert exitcode == 0
+
+def test_neg_null_arg():
+    """Negative:  no input means no output and non-0 exit code"""
+    output, exitcode = run_add_integers()
+    assert output == ""
+    assert exitcode != 0
