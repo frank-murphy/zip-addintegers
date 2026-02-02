@@ -38,4 +38,3 @@ def test_git_status():
     output = output.splitlines()
     assert output[0] != "On branch main" # This will fail when on git main
     assert exitcode == 0
-
